@@ -195,6 +195,64 @@ function initButtonSprites() {
   });
 }
 
+// Parallax effect on mouse move
+function initParallax() {
+  const animatedBg = document.getElementById('animated-background');
+  const bgImage = document.getElementById('background-image');
+  const portfolioContainer = document.getElementById('portfolio-container');
+  const title = document.getElementById('title');
+  
+  let mouseX = 0;
+  let mouseY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  
+  // Smooth interpolation for parallax
+  function animate() {
+    currentX += (mouseX - currentX) * 0.05;
+    currentY += (mouseY - currentY) * 0.00;
+    
+    // Background layers move more with mouse - creating depth effect
+    if (animatedBg) {
+      // Further background moves more (50px max movement)
+      animatedBg.style.transform = `translate(${currentX * 50}px, ${currentY * 50}px)`;
+    }
+    
+    if (bgImage) {
+      // Closer background moves less (30px max movement)
+      bgImage.style.transform = `translate(${currentX * 30}px, ${currentY * 30}px)`;
+    }
+    
+    // Content moves slightly in opposite direction for depth
+    if (portfolioContainer) {
+      portfolioContainer.style.transform = `translate(${currentX * -10}px, ${currentY * -10}px)`;
+    }
+    
+    if (title) {
+      title.style.transform = `translate(${currentX * -5}px, ${currentY * -5}px)`;
+    }
+    
+    requestAnimationFrame(animate);
+  }
+  
+  document.addEventListener('mousemove', (e) => {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    // Calculate normalized position (-1 to 1)
+    mouseX = (e.clientX - centerX) / centerX;
+    mouseY = (e.clientY - centerY) / centerY;
+  });
+  
+  // Reset on mouse leave
+  document.addEventListener('mouseleave', () => {
+    mouseX = 0;
+    mouseY = 0;
+  });
+  
+  animate();
+}
+
 // Initialize on page load
 window.addEventListener('load', () => {
   console.log('Maikeru website loaded');
@@ -212,4 +270,7 @@ window.addEventListener('load', () => {
   
   // Initialize button sprites
   initButtonSprites();
+  
+  // Initialize parallax effect
+  initParallax();
 });
