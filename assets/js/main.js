@@ -88,6 +88,24 @@ function initButtonSprites() {
       preloadImg.src = src;
     });
     
+    // Set button size to match scaled image for proper hover area
+    const SCALE = 3;
+    function setButtonSize() {
+      if (img.naturalWidth && img.naturalHeight) {
+        button.style.width = (img.naturalWidth * SCALE) + 'px';
+        button.style.height = (img.naturalHeight * SCALE) + 'px';
+        button.style.minWidth = (img.naturalWidth * SCALE) + 'px';
+        button.style.minHeight = (img.naturalHeight * SCALE) + 'px';
+      }
+    }
+    
+    // Set size when image loads
+    if (img.complete) {
+      setButtonSize();
+    } else {
+      img.addEventListener('load', setButtonSize, { once: true });
+    }
+    
     let isHovering = false;
     let isPressed = false;
     
