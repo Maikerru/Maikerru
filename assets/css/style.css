@@ -308,6 +308,60 @@ html, body {
   transform: scale(0.95);
 }
 
+/* CRT Scanlines Overlay */
+#crt-scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 4px,
+    transparent 3px,
+    transparent 6px
+  );
+  opacity: 1;
+  animation: scanlineMove 8s linear infinite;
+}
+
+@keyframes scanlineMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 6px;
+  }
+}
+
+/* CRT Vignette Overlay */
+#crt-vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.3) 60%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide CRT effects in fullscreen black mode */
+.fullscreen-black #crt-scanlines,
+.fullscreen-black #crt-vignette {
+  display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   #title {
