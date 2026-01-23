@@ -192,9 +192,11 @@ html, body {
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   text-align: center;
-  margin-bottom: 60px;
+  margin: 0 auto 60px auto;
   letter-spacing: -0.02em;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 1200px;
 }
 
 /* Buttons Container */
@@ -202,9 +204,11 @@ html, body {
   position: relative;
   width: 100%;
   max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 24px;
   padding: 0 20px;
 }
@@ -218,7 +222,8 @@ html, body {
   border: none;
   background: transparent;
   padding: 0;
-  display: inline-block;
+  margin: 0 auto;
+  display: block;
   transition: transform 0.1s ease;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;

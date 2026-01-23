@@ -92,10 +92,17 @@ function initButtonSprites() {
     const SCALE = 3;
     function setButtonSize() {
       if (img.naturalWidth && img.naturalHeight) {
-        button.style.width = (img.naturalWidth * SCALE) + 'px';
-        button.style.height = (img.naturalHeight * SCALE) + 'px';
-        button.style.minWidth = (img.naturalWidth * SCALE) + 'px';
-        button.style.minHeight = (img.naturalHeight * SCALE) + 'px';
+        const scaledWidth = img.naturalWidth * SCALE;
+        const scaledHeight = img.naturalHeight * SCALE;
+        button.style.width = scaledWidth + 'px';
+        button.style.height = scaledHeight + 'px';
+        button.style.minWidth = scaledWidth + 'px';
+        button.style.minHeight = scaledHeight + 'px';
+        button.style.maxWidth = scaledWidth + 'px';
+        button.style.maxHeight = scaledHeight + 'px';
+        // Ensure button is centered
+        button.style.marginLeft = 'auto';
+        button.style.marginRight = 'auto';
       }
     }
     
